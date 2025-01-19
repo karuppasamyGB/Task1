@@ -6,27 +6,25 @@
     <title></title>
     <style>
 button {
-    background-color: #4CAF50; /* Green background */
-    color: white;              /* White text */
-    padding: 10px 20px;        /* Padding to make the button larger */
-    border: none;              /* Remove the default border */
-    border-radius: 5px;        /* Rounded corners */
-    cursor: pointer;          /* Pointer cursor on hover */
-    font-size: 16px;           /* Font size */
-    text-align: center;        /* Center the text inside the button */
-    display: inline-block;     /* Keep the button inline */
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    background-color: #4CAF50;
+    color: white;             
+    padding: 10px 20px;       
+    border: none;            
+    border-radius: 5px;        
+    cursor: pointer;         
+    font-size: 16px;          
+    text-align: center;      
+    display: inline-block;    
+    transition: background-color 0.3s ease;
 }
 
-/* Hover Effect */
 button:hover {
-    background-color: #45a049; /* Darker green when hovered */
+    background-color: #45a049;
 }
 
-/* Optional: Focus Effect for Accessibility */
 button:focus {
-    outline: none;             /* Remove the default focus outline */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for focus */
+    outline: none;            
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 * {box-sizing: border-box;}
 body { 
@@ -98,21 +96,15 @@ body {
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Start the session
 session_start();
 
-// Include your database configuration
 include '../models/db_config.php';
 
-// Get the logged-in user's ID from the session
-$logged_in_user_id = $_SESSION['user_id'] ?? null; // Assuming 'user_id' is stored in the session
+$logged_in_user_id = $_SESSION['user_id'] ?? null;n
 
-// Get the blog ID from the URL
 $blog_id = $_GET['id'] ?? null;
 
 if ($blog_id) {
-    // echo $blog_id;
-    // Prepare the SQL query to fetch blog details along with the author's information
     $query = "SELECT blogs.*, users.Users_Id AS author_id, users.username AS author_username 
               FROM blogs 
               JOIN users ON blogs.author_id = users.Users_Id 
@@ -132,7 +124,6 @@ if ($blog_id) {
             $author_username = htmlspecialchars($row['author_username']);
             $author_id = $row['author_id'];
             
-            // Display the blog details
             echo "<h1>$title</h1>";
             echo "<p><strong>Posted on:</strong> $formatted_time</p>";
             echo "<p><strong>Author:</strong> $author_username</p>";
@@ -142,7 +133,6 @@ if ($blog_id) {
                     <button>Back to Blogs</button>
                   </a>";
 
-            // Check if the logged-in user is the author of the blog
             if ($logged_in_user_id == $author_id) {
                 echo "<a href='/Simple%20web/views/edit_blog.php?id=" . urlencode($blog_id) . "'>
                         <button>Edit</button>
@@ -166,7 +156,6 @@ if ($blog_id) {
 $conn->close();
 ?>
 
-<!-- Footer -->
 <div>
     <?php include('footer.php'); ?>
 </div>
