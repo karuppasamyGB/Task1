@@ -6,10 +6,7 @@ include '../models/db_config.php';
 if (!isset($_SESSION['user_id'])) {
     die("You must be logged in to edit a blog.");
 }
-// if (!isset($_SESSION['Blogs_id']))
-// $blog_id = $_GET['Blogs_id'] ?? null;
 
-// Get the blog data from the form
 $blog_id = $_POST['id'] ?? null;
 $title = $_POST['title'] ?? '';
 $slug = $_POST['slug'] ?? '';
