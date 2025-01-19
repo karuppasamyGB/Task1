@@ -1,48 +1,4 @@
 <?php
-// session_start();
-// include '../models/db_config.php';
-
-// if (!isset($_SESSION['user_id'])) {
-//     die("You must be logged in to delete a blog.");
-// }
-
-// $blog_id = $_GET['id'] ?? null;
-// $user_id = $_SESSION['user_id'];
-
-// if (!$blog_id) {
-//     die("Blog ID not provided.");
-// }
-
-// $query = "SELECT author_id FROM blogs WHERE id = ?";
-// $stmt = $conn->prepare($query);
-// $stmt->bind_param("i", $blog_id);
-// $stmt->execute();
-// $stmt->store_result();
-// $stmt->bind_result($author_id);
-// $stmt->fetch();
-
-// if ($author_id != $user_id) {
-//     die("You are not the author of this blog.");
-// }
-
-// $query = "DELETE FROM blogs WHERE id = ?";
-// $stmt = $conn->prepare($query);
-// $stmt->bind_param("i", $blog_id);
-// $stmt->execute();
-
-// if ($stmt->affected_rows > 0) {
-//     echo "Blog deleted successfully!";
-//     header("Location: /Simple%20web/views/blogs.php");
-//     exit();
-// } else {
-//     echo "Error deleting blog.";
-// }
-
-// $stmt->close();
-// $conn->close();
-
-?>
-<?php
 session_start();
 include '../models/db_config.php';
 
