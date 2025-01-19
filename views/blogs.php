@@ -180,7 +180,7 @@ button {
 }
 
 
-/* jan 18 10 33*/
+
 /*  Dropdown Menu Styling */
 .dropdown {
     position: absolute;
@@ -231,12 +231,12 @@ button {
     session_start();
     include '../models/db_config.php'; 
 
-    // Assuming the logged-in user username is stored in the session
+    
     $username = $_SESSION['username'] ?? null;
 
     
     if ($username) {
-      // Fetch the user data based on user ID (assuming the user ID is stored in $_SESSION['user_id'])
+      
       $user_id = $_SESSION['user_id']; // Make sure you are storing user_id in the session
       $query = "SELECT username FROM users WHERE Users_Id = '$user_id'"; // Only select the username based on user ID
       $user_result = $conn->query($query);
@@ -245,29 +245,6 @@ button {
           $user = $user_result->fetch_assoc();
           $username = $user['username']; // Fetch the username based on the user ID
           
-          // Use a default image as no avatar column exists in the table
-         //  $avatar = 'default.png'; Default avatar for all users
-          
-          // Display the user avatar and username in the header
-
-          //best working till now
-          // <div class='user-info'>
-          //         <img src='/Simple%20web/assets/default.png' alt='User Avatar'>
-          //         <span>$username</span>
-          //         <button >Logout</button>
-          //     </div>
-          //jan 18 12 36
-      //     <div class='user-info'>
-              
-      //     <img src='/Simple%20web/assets/default.png' alt='User Avatar' id='user-avatar'>
-         
-      //     <div class='dropdown hidden' id='user-dropdown'>
-      //      <a id='user-name'>$username</a>
-      //     <a href='/Simple%20web/views/create_blog_page.php'>create blog</a>
-      //         <a href='/Simple%20web/controllers/logout.php'>Logout</a>
-              
-      //     </div>
-      // </div>
           echo "
               <div class='user-info'>
               
@@ -297,28 +274,21 @@ button {
 // Fetch all blogs (visible to everyone)
 $query = "SELECT * FROM blogs join users on users.Users_Id=blogs.author_id ORDER BY blogs.created_at DESC";
 $result = $conn->query($query);
-// echo $result;
-// $username = $result.username;
 
-// Assume $author_username is fetched from the database
- // This will print the value of $author_username to the page
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $title = htmlspecialchars($row['title']);
         $slug = htmlspecialchars($row['slug']);
         $author_username= htmlspecialchars($row['username']);
-        // $author_blogid= htmlspecialchars($row['Blogs_id']);
         $content = htmlspecialchars($row['content']);
         $created_at = $row['created_at'];
         $author_id = $row['author_id']; // The blog's author ID
 
-        // Format the date to a more user-friendly format
+       
         $formatted_time = date("F j, Y, g:i a", strtotime($created_at));
         
         $short_content = substr($content, 0, 100); 
 
-        // Display blog information
-      
         echo "
         <div class='card'>
           <img src='$slug' alt='Blog Image'>
@@ -331,7 +301,6 @@ if ($result && $result->num_rows > 0) {
           </a>
         ";
 
-        // Check if the logged-in user is the author of the blog by comparing author_id with the logged-in user's ID
         if ($username && $user['id'] === $author_id) {
           echo "
           <a href='/Simple%20web/views/edit_blog.php?id={$row['Blogs_id']}'>
@@ -382,12 +351,10 @@ $(document).ready(function() {
     const userInfo = document.querySelector(".user-info");
     const dropdown = document.getElementById("user-dropdown");
 
-    // Toggle the dropdown when user clicks on the user info
     userInfo.addEventListener("click", () => {
         dropdown.classList.toggle("hidden");
     });
 
-    // Hide the dropdown when clicking outside
     document.addEventListener("click", (event) => {
         if (!userInfo.contains(event.target)) {
             dropdown.classList.add("hidden");
