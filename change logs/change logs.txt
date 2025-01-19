@@ -1,4 +1,5 @@
-2 _ make the card component to better UI form
-4 _ show login button in a popup
+1 _ added user emoji after login
+2 _ Added Mailtrap for contactus form
 
-
+Not yet added
+1 _ show login button in a popup
