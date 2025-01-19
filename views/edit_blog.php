@@ -1,21 +1,20 @@
 <?php
 session_start();
-include '../models/db_config.php';  // Include database connection
+include '../models/db_config.php'; 
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     die("You must be logged in to edit a blog.");
 }
 
-// Get the blog ID from the URL (for example: edit_blog.php?id=1)
+
 $blog_id = $_GET['id'] ?? null;
-$user_id = $_SESSION['user_id']; // Logged-in user ID
+$user_id = $_SESSION['user_id'];
 
 if (!$blog_id) {
     die("Blog ID not provided.");
 }
 
-// Fetch the blog details from the database
 $query = "SELECT * FROM blogs WHERE Blogs_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $blog_id);
@@ -29,7 +28,7 @@ if ($stmt->num_rows === 0) {
 
 $stmt->fetch();
 
-// Check if the logged-in user is the author of the blog
+
 if ($author_id !== $user_id) {
     die("You are not the author of this blog.");
 }
